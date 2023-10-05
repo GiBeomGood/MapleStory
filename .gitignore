@@ -2,4 +2,6 @@
 *.xlsx
 *.csv
 *.ipynb_checkpoints
+*.sh
 __pycache__
+.gitignore
