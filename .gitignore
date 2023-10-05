@@ -1,6 +1,0 @@
-*.docx
-*.xlsx
-*.csv
-*.ipynb_checkpoints
-*.sh
-__pycache__
