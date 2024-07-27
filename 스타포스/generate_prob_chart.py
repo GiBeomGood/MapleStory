@@ -1,7 +1,12 @@
 import numpy as np
 import pandas as pd
 
-def generate_prob_chart(starcatch=True, event_15=False, dest_prevention=False) -> np.ndarray:
+
+def generate_prob_chart(
+        starcatch=True,
+        event_15=False,
+        dest_prevention=False
+) -> np.ndarray:
     prob_chart = np.zeros((25, 4))
     prob_chart[:, 0] = [
         0.95, 0.9, 0.85, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55,
@@ -33,15 +38,14 @@ def generate_prob_chart(starcatch=True, event_15=False, dest_prevention=False) -
 
     return prob_chart
 
-def generate_dest_prob_chart(starcatch=True, event_15=False, dest_prevention=False, pretty=False):
+def generate_dest_prob_chart(
+        starcatch=True,
+        event_15=False,
+        dest_prevention=False,
+        pretty=False
+) -> pd.DataFrame:
     prob = generate_prob_chart(starcatch, event_15, dest_prevention)
-    dest_chart = pd.DataFrame(
-        np.zeros((10, 10)),
-        columns=range(15, 25),
-        index=range(16, 26)
-    )  # 15->16 ~ 24->25
     dest_chart = np.zeros((10, 10))  # 15->16 ~ 24->25
-    dest_chart[-1, -1] = 1
 
     for end in range(10):
         start = end+15
@@ -61,6 +65,6 @@ def generate_dest_prob_chart(starcatch=True, event_15=False, dest_prevention=Fal
     )
 
     if pretty is True:
-        dest_chart = dest_chart.applymap(lambda x: '' if x==0 else f'{x:6.2%}')
+        dest_chart = dest_chart.map(lambda x: '' if x==0 else f'{x:6.2%}')
 
     return dest_chart
